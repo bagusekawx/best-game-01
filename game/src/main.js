@@ -164,6 +164,7 @@ class Game {
     } else {
       this.state = 'playing';
       ui.showHudOnly();
+      clearQueues(); // a pause pressed during the draft must not fire on resume
     }
   }
 
@@ -222,6 +223,7 @@ class Game {
     this.time = RUN_SECONDS; // endless clock keeps counting from 6:00
     ui.showHudOnly();
     ui.showBanner('ENDLESS MODE', 'No more boss. Just you and the heap.', 2600);
+    clearQueues();
   }
 
   // ---- fixed-step simulation ----
@@ -440,7 +442,7 @@ document.getElementById('btn-title-over').addEventListener('click', () => { game
 document.getElementById('btn-mute').addEventListener('click', () => ui.setMuteButton(toggleMute()));
 document.getElementById('btn-pause').addEventListener('click', () => {
   if (game.state === 'playing') { game.state = 'paused'; ui.showOnly('pause-screen'); }
-  else if (game.state === 'paused') { game.state = 'playing'; ui.showHudOnly(); }
+  else if (game.state === 'paused') { game.state = 'playing'; ui.showHudOnly(); clearQueues(); }
 });
 window.addEventListener('keydown', (event) => {
   if (event.code === 'KeyM') ui.setMuteButton(toggleMute());
@@ -450,7 +452,7 @@ window.addEventListener('keydown', (event) => {
     const index = ['Digit1', 'Digit2', 'Digit3'].indexOf(event.code);
     if (index >= 0 && game.draftCards[index]) game.pickCard(game.draftCards[index]);
   }
-  if (event.code === 'Escape' && game.state === 'paused') { game.state = 'playing'; ui.showHudOnly(); }
+  if (event.code === 'Escape' && game.state === 'paused') { game.state = 'playing'; ui.showHudOnly(); clearQueues(); }
 });
 
 // ---- main loop: fixed-step simulation, render every frame ----
