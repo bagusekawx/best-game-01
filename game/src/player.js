@@ -122,6 +122,20 @@ export class Player {
 
   draw(ctx) {
     const bob = this.moving ? Math.sin(this.walkCycle) * 2 : Math.sin(performance.now() / 400) * 1;
+    // Soft teal glow under the bot so it reads against the dark yard.
+    const glow = ctx.createRadialGradient(this.x, this.y + 8, 4, this.x, this.y + 8, 34);
+    glow.addColorStop(0, 'rgba(46, 196, 182, 0.35)');
+    glow.addColorStop(1, 'rgba(46, 196, 182, 0)');
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y + 8, 34, 0, Math.PI * 2);
+    ctx.fill();
+    // White ring marking the bot's space, so it pops in a crowd.
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.55)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius + 4, 0, Math.PI * 2);
+    ctx.stroke();
     ctx.save();
     ctx.translate(this.x, this.y + bob);
     if (this.dashing > 0) ctx.globalAlpha = 0.75;

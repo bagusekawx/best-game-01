@@ -10,6 +10,12 @@ export const SCREENS = ['title-screen', 'pause-screen', 'draft-screen', 'win-scr
 export function showOnly(screenId) {
   for (const id of SCREENS) $(id).classList.toggle('hidden', id !== screenId);
   $('hud').classList.toggle('hidden', screenId === 'title-screen');
+  hideBanner(); // a screen change clears any announcement
+}
+
+export function hideBanner() {
+  if (bannerTimer) window.clearTimeout(bannerTimer);
+  $('banner').classList.add('hidden');
 }
 
 export function showHudOnly() {

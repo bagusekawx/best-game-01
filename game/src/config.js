@@ -25,14 +25,14 @@ export const DIFFICULTY = {
 };
 
 export const PLAYER_BASE = {
-  radius: 16,
+  radius: 18,
   speed: 235,
   maxHp: 100,
   magnet: 90,
   dashDistance: 300,
   dashTime: 0.16,
   dashCooldown: 2.2,
-  contactGrace: 0.5, // seconds of invulnerability after a hit
+  contactGrace: 0.75, // seconds of invulnerability after a hit
 };
 
 export const XP_FOR_LEVEL = (level) => 6 + level * 5; // scrap needed to go from `level` to `level + 1`
@@ -75,7 +75,7 @@ export const WEAPONS = {
     ],
   },
   nova: {
-    name: 'Magnet Nova', icon: '🧲', blurb: 'A magnetic pulse that blasts the whole crowd back.',
+    name: 'Magnet Nova', icon: '💥', blurb: 'A magnetic pulse that blasts the whole crowd back.',
     max: 5,
     levels: [
       { damage: 12, radius: 140, cooldown: 3.4, knock: 320 },

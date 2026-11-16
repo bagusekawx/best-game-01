@@ -104,7 +104,7 @@ class Game {
 
   killEnemy(enemy) {
     this.kills += 1;
-    this.combo.count += 1;
+    this.combo.count = Math.min(30, this.combo.count + 1);
     this.combo.timer = 2.5;
     const mult = 1 + Math.min(this.combo.count, 20) * 0.05;
     this.score += Math.round(enemy.score * mult);
@@ -130,7 +130,7 @@ class Game {
       const roll = Math.random();
       if (roll < 0.02) this.pickups.dropSpecial('bomb', enemy.x, enemy.y);
       else if (roll < 0.05) this.pickups.dropSpecial('magnet', enemy.x, enemy.y);
-      else if (roll < 0.09 && this.player.hp < this.player.maxHp * 0.7) this.pickups.dropSpecial('heal', enemy.x, enemy.y);
+      else if (roll < 0.11 && this.player.hp < this.player.maxHp * 0.7) this.pickups.dropSpecial('heal', enemy.x, enemy.y);
     }
     if (this.combo.count > 0 && this.combo.count % 25 === 0) {
       this.particles.floatText(this.player.x, this.player.y - 30, `${this.combo.count} COMBO!`, '#ff9d5c', 18);
