@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SCRAPHEAP — a junkyard survivor</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+  <canvas id="game" width="1280" height="720"></canvas>
+
+  <!-- HUD -->
+  <div id="hud" class="hidden">
+    <div id="xpbar"><div id="xpfill"></div><span id="xplabel">LV 1</span></div>
+    <div id="hud-top-left">
+      <div id="hpbar"><div id="hpfill"></div><span id="hplabel">100 / 100</span></div>
+      <div id="dashbar"><div id="dashfill"></div><span>DASH [SPACE]</span></div>
+    </div>
+    <div id="hud-top-center">
+      <div id="timer">6:00</div>
+      <div id="objective">Survive until the Compactor arrives</div>
+    </div>
+    <div id="hud-top-right">
+      <div id="kills">☠ 0</div>
+      <div id="score">SCORE 0</div>
+      <div id="combo" class="hidden">COMBO ×2</div>
+    </div>
+    <div id="bossbar" class="hidden">
+      <div id="bossname">THE COMPACTOR</div>
+      <div id="bossfill-wrap"><div id="bossfill"></div></div>
+    </div>
+    <div id="weapons"></div>
+    <div id="hud-buttons">
+      <button id="btn-mute" title="Mute [M]">🔊</button>
+      <button id="btn-pause" title="Pause [P]">⏸</button>
+    </div>
+    <div id="banner" class="hidden"><div id="banner-title"></div><div id="banner-sub"></div></div>
+    <div id="bosswarn" class="hidden">⚠ THE COMPACTOR IS COMING ⚠</div>
+  </div>
+
+  <!-- Title -->
+  <div id="title-screen" class="screen">
+    <div class="title-kicker">MAKE.FUN · BEST GAME</div>
+    <h1>SCRAPHEAP</h1>
+    <p class="title-sub">The junkyard woke up angry. You are BOLT, one small bot with a spark gun
+      and a bad attitude. Survive <b>6 minutes</b>, then scrap <b>THE COMPACTOR</b>.</p>
+    <div class="difficulty-row" id="difficulty-row">
+      <button class="diff-btn" data-diff="chill">CHILL</button>
+      <button class="diff-btn selected" data-diff="normal">NORMAL</button>
+      <button class="diff-btn" data-diff="hell">SCRAPYARD HELL</button>
+    </div>
+    <p class="diff-hint" id="diff-hint">The junkyard as it is. Fair and mean.</p>
+    <button id="btn-start" class="big-btn">▶ START SCRAPPING</button>
+    <div class="howto">
+      <div><b>WASD / ARROWS</b> move</div>
+      <div><b>SPACE</b> dash (invulnerable)</div>
+      <div><b>P</b> pause · <b>M</b> mute</div>
+      <div>Weapons fire on their own — collect scrap, level up, draft upgrades.</div>
+    </div>
+    <p class="best-line" id="best-line"></p>
+  </div>
+
+  <!-- Pause -->
+  <div id="pause-screen" class="screen hidden">
+    <h2>PAUSED</h2>
+    <p class="screen-sub">The yard waits. It is patient. It is rust.</p>
+    <button id="btn-resume" class="big-btn">▶ RESUME</button>
+    <button id="btn-restart-pause" class="btn">↻ RESTART RUN</button>
+    <button id="btn-quit-pause" class="btn">⌂ TITLE SCREEN</button>
+  </div>
+
+  <!-- Level-up draft -->
+  <div id="draft-screen" class="screen hidden">
+    <h2>LEVEL UP!</h2>
+    <p class="screen-sub">Pick one upgrade. Choose well — the yard does not forgive.</p>
+    <div id="draft-cards"></div>
+    <p class="draft-hint">Click a card, or press 1 / 2 / 3.</p>
+  </div>
+
+  <!-- Victory -->
+  <div id="win-screen" class="screen hidden">
+    <h2 class="win-title">🏆 COMPACTOR SCRAPPED!</h2>
+    <p class="screen-sub">The junkyard is quiet again. BOLT stands alone on a mountain of scrap.</p>
+    <div class="stats" id="win-stats"></div>
+    <button id="btn-endless" class="big-btn">♾ KEEP SCRAPPING (ENDLESS)</button>
+    <button id="btn-restart-win" class="btn">↻ NEW RUN</button>
+    <button id="btn-title-win" class="btn">⌂ TITLE SCREEN</button>
+  </div>
+
+  <!-- Game over -->
+  <div id="over-screen" class="screen hidden">
+    <h2 class="lose-title">💥 WRECKED</h2>
+    <p class="screen-sub">BOLT joins the heap. The yard always wins in the end — unless you run it back.</p>
+    <div class="stats" id="over-stats"></div>
+    <button id="btn-restart-over" class="big-btn">↻ RUN IT BACK [R]</button>
+    <button id="btn-title-over" class="btn">⌂ TITLE SCREEN</button>
+  </div>
+</div>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
